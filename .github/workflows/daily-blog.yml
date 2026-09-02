@@ -1,0 +1,52 @@
+name: Daily blog post
+
+on:
+  schedule:
+    # 毎日 10:20 JST（01:20 UTC）
+    - cron: '20 1 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-blog
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Generate post
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-blog-post.mjs
+
+      - name: Verify build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+
+      - name: Commit and push
+        run: |
+          if [ -z "$(git status --porcelain content/blog)" ]; then
+            echo "No new post. Nothing to commit."
+            exit 0
+          fi
+          git config user.name "yangken-bot"
+          git config user.email "actions@github.com"
+          git add content/blog
+          git commit -m "blog: $(date -u -d '+9 hours' +'%Y-%m-%d') の記事を追加"
+          git push
