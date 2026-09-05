@@ -84,9 +84,9 @@ export function Hero() {
         </h1>
 
         <p className="mt-9 max-w-md font-gothic text-[0.82rem] leading-[2.1] text-paper/85 sm:mt-11 sm:text-[0.92rem]">
-          仕事帰りに一杯。一人でも、二軒目でも。
+          焼きたてのたこ焼きをつまみに、ハイボールを一杯。
           <br />
-          焼きたてのたこ焼きをつまみに、気軽にどうぞ。
+          仕事帰りにも、一人でも、二軒目にも。
         </p>
       </div>
 

@@ -18,9 +18,9 @@ import {
 } from '@/lib/site';
 
 export const metadata = pageMetadata({
-  title: 'ヤング軒｜三軒茶屋駅徒歩4分のたこ焼き・居酒屋',
+  title: 'アクセス｜三軒茶屋駅 徒歩4分・世田谷区太子堂のヤング軒',
   description:
-    'ヤング軒への行き方。東急田園都市線・世田谷線 三軒茶屋駅から徒歩約4分、世田谷区太子堂4丁目5-1のスーパーヘアーヤング内。営業時間16:00〜22:00、定休日は水曜・日曜。地図と目印をまとめました。',
+    'ヤング軒への行き方。東急田園都市線・世田谷線 三軒茶屋駅から徒歩約4分、世田谷区太子堂4丁目5-1のスーパーヘアーヤング内。太子堂で飲める店を探している方へ、地図と駅からの目印、営業時間16:00〜22:00・定休日 水曜・日曜をまとめました。',
   path: '/access',
 });
 
@@ -128,7 +128,7 @@ export default function AccessPage() {
                   <dt className="w-24 shrink-0 font-gothic text-[0.75rem] tracking-[0.14em] text-sumi-3">
                     スタイル
                   </dt>
-                  <dd className="text-sumi">立ち飲み・テイクアウト可</dd>
+                  <dd className="text-sumi">店先のカウンターで立ち飲み／たこ焼きのテイクアウト可</dd>
                 </div>
               </dl>
 

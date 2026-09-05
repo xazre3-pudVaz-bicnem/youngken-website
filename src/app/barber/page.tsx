@@ -10,7 +10,7 @@ import { PHOTOS } from '@/lib/photos';
 import { BARBER, SITE_NAME } from '@/lib/site';
 
 export const metadata = pageMetadata({
-  title: '百年床屋と、立ち飲み処。｜三軒茶屋 ヤング軒とスーパーヘアーヤング',
+  title: 'スーパーヘアーヤングとヤング軒の歴史｜三軒茶屋の百年床屋',
   description:
     '三軒茶屋で1923年から4世代続く理髪店スーパーヘアーヤング。その最初の屋号が「ヤング軒」でした。創業100年の節目に三代目が始めた立ち飲み処ヤング軒と、街と店の物語をまとめました。',
   path: '/barber',
@@ -161,7 +161,7 @@ export default function BarberPage() {
           {
             href: '/about',
             label: 'ヤング軒について',
-            body: '店の使い方と、立ち飲みという間口のこと。',
+            body: '店の使い方と、飲む店としての間口のこと。',
           },
           {
             href: '/takoyaki',

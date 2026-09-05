@@ -13,7 +13,7 @@ export function Footer() {
           <div>
             <Logo size="lg" tone="paper" />
             <p className="mt-7 max-w-sm font-gothic text-[0.85rem] leading-[2.1] text-paper/70">
-              三軒茶屋・太子堂の、たこ焼きと立ち飲みの店。
+              三軒茶屋・太子堂の、たこ焼きとお酒の店。
               <br />
               仕事帰りの一杯にも、二軒目の寄り道にも。
             </p>

@@ -51,9 +51,19 @@ export const DRINKS: MenuItem[] = [
   { name: '缶ビール', price: DRINK_PRICE },
 ];
 
-/** 店内の棚に並ぶ缶つまみ。銘柄は特定せず、種類のみ記載する。 */
+/**
+ * おつまみ・一品。
+ * 店内の黒板（きゅうりの旨キムチ）と棚の缶つまみから確認できたものだけ。
+ * 価格は写真から読み取れないため null（＝店頭表示）にしてある。
+ * 料理の一次情報が増えたらここに足す。
+ */
+export const SNACKS: MenuItem[] = [
+  { name: 'きゅうりの旨キムチ', note: '黒板の一品', price: null },
+  { name: '缶つまみ各種', note: '焼き鳥・鯖・いか・赤貝ほか', price: null },
+];
+
 export const SNACKS_NOTE =
-  'カウンターの棚には、焼き鳥・鯖・いかなどの缶つまみを常備。たこ焼きが焼き上がるまでの一品にどうぞ。';
+  'カウンターの棚には焼き鳥や鯖、いかなどの缶つまみが並んでいます。黒板にはきゅうりの旨キムチ。たこ焼きが焼き上がるまでの一品にどうぞ。';
 
 export const formatPrice = (price: number | null) =>
   price === null ? '店頭表示' : `${price.toLocaleString('ja-JP')}円`;

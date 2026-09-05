@@ -55,13 +55,28 @@ export const MAP_EMBED_URL =
   'https://maps.google.com/maps?output=embed&hl=ja&z=17&q=' +
   encodeURIComponent('東京都世田谷区太子堂4-5-1');
 
-/** 提供スタイル */
+/**
+ * 提供スタイル。
+ * 店頭の貼り紙は「立ち飲みもやってるよ！」、提灯は「立呑」。
+ * つまり立ち飲みで飲めることは確実だが、着席できる席の有無は写真から確認できていない。
+ * したがって「立ち飲み専門」「カウンターだけ」「席がない」と断定しないこと。
+ */
 export const SERVICE = {
   standing: '立ち飲み',
   takeout: 'テイクアウト',
   priceRange: '￥',
   cuisine: ['たこ焼き', '居酒屋'],
+  /** 画面で使う言い回しの基準 */
+  styleLabel: '店先のカウンターで立ち飲み・テイクアウト',
 } as const;
+
+/** 5秒で伝えたい要点（ヒーロー直下で使う） */
+export const QUICK_FACTS = [
+  { label: '場所', value: '三軒茶屋駅 徒歩4分' },
+  { label: '名物', value: 'たこ焼き 6個700円' },
+  { label: 'お酒', value: 'ドリンク 各500円' },
+  { label: '営業', value: '16:00〜22:00／水・日休' },
+] as const;
 
 /** 百年床屋のストーリー（既存LP掲載文に準拠） */
 export const BARBER = {

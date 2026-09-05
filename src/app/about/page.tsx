@@ -13,9 +13,9 @@ import { ACCESS, BARBER, HOURS, NAP } from '@/lib/site';
 import { DRINK_PRICE, TAKOYAKI_BASE, YORIMICHI_SET } from '@/lib/menu';
 
 export const metadata = pageMetadata({
-  title: 'ヤング軒について｜三軒茶屋のたこ焼きと立ち飲み処',
+  title: 'ヤング軒について｜三軒茶屋・太子堂のたこ焼きと一杯の店',
   description:
-    'ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分の、たこ焼きとお酒・一品を楽しめる立ち飲み処です。店の成り立ち、使い方、営業時間、百年続く床屋との関係をまとめました。',
+    'ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。店の成り立ち、使い方、営業時間、百年続く床屋との関係をまとめました。',
   path: '/about',
 });
 
@@ -33,7 +33,7 @@ const FACTS = [
     label: '価格帯',
     value: `たこ焼き6個 ${TAKOYAKI_BASE.price}円／ドリンク各 ${DRINK_PRICE}円／寄り道セット ${YORIMICHI_SET.price}円`,
   },
-  { label: 'スタイル', value: '立ち飲み・テイクアウト可' },
+  { label: 'スタイル', value: '店先のカウンターで立ち飲み／たこ焼きのテイクアウト可' },
 ];
 
 export default function AboutPage() {
@@ -50,7 +50,7 @@ export default function AboutPage() {
         }
         lead={
           <p>
-            ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分の場所にある、たこ焼きとお酒、缶つまみを楽しめる飲食店です。立ち飲みのスタイルで、一人でも、二人でも、仕事帰りの一杯にも使えます。
+            ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。焼きたてのたこ焼きやおつまみをつまみながら、ハイボールやサワーを一杯。一人でも、二人でも、仕事帰りの一杯にも使えます。
           </p>
         }
         trail={[{ name: 'ヤング軒について', href: '/about' }]}
@@ -87,13 +87,13 @@ export default function AboutPage() {
         <Container size="wide">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
             <Reveal>
-              <SectionTitle eyebrow="Style">立ち飲みという、間口。</SectionTitle>
+              <SectionTitle eyebrow="Style">飲む店としての、間口。</SectionTitle>
               <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
                 <p>
-                  ヤング軒は席を予約して腰を据える店ではありません。カウンターに立って、焼き上がったたこ焼きをつまみながら一杯。それだけで完結します。
+                  主役は店先のカウンターです。焼き上がったたこ焼きをつまみながら、ハイボールやサワーを一杯。それだけで一晩ぶんになります。
                 </p>
                 <p>
-                  だから、時間が読めます。三軒茶屋で待ち合わせまで二十分あるとき。一軒目のあとに、もう少しだけ話したいとき。家に帰る前に、今日を一度区切りたいとき。そういう夜のための店です。
+                  頼むものが決まっているので、時間が読めます。三軒茶屋で待ち合わせまで二十分あるとき。一軒目のあとに、もう少しだけ話したいとき。家に帰る前に、今日を一度区切りたいとき。そういう夜のための店です。
                 </p>
                 <p>
                   たこ焼きだけの持ち帰りもできます。焼きたてを持って帰って、家で飲むのもいい使い方です。
@@ -133,12 +133,7 @@ export default function AboutPage() {
             <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
               <p>
                 ヤング軒があるのは、三軒茶屋で{BARBER.foundedYear}年から
-                {BARBER.generations}世代続く理髪店「{BARBER.name}」の店内です。
-              </p>
-              <p>
-                もともと、その理髪店の屋号が「ヤング軒」でした。{BARBER.renamedEra}
-                に二代目が屋号を「{BARBER.name}
-                」へ改めてから、長く三軒茶屋の街とともに歩んできました。そして創業100年の節目に、三代目が新しい挑戦として立ち飲み処を開き、店に最初の名前が戻ってきました。
+                {BARBER.generations}世代続く理髪店「{BARBER.name}」の店内です。そしてその理髪店のいちばん最初の屋号が、「ヤング軒」でした。
               </p>
               <p>
                 髪を切りに来る人と、一杯飲みに来る人。人が集まる場所であることは、百年前から変わっていません。

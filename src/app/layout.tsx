@@ -20,12 +20,12 @@ import { jsonLdScript, restaurantJsonLd, websiteJsonLd } from '@/lib/jsonld';
 const FONT_CSS = '/fonts/shippori-mincho-b1.css';
 
 const DESCRIPTION =
-  '三軒茶屋のたこ焼き・立ち飲み処ヤング軒。焼きたてのたこ焼き6個700円、ドリンク各500円、寄り道セット990円。仕事帰りの一杯や一人飲み、二軒目にも。三軒茶屋駅から徒歩約4分、16時から22時まで営業。';
+  '三軒茶屋・太子堂のヤング軒。焼きたてのたこ焼き6個700円をつまみに、ハイボールやサワーを各500円で。寄り道セット990円。仕事帰りの一杯や一人飲み、二軒目にも。三軒茶屋駅から徒歩約4分、16時から22時まで営業。';
 
 export const metadata: Metadata = {
   metadataBase: HAS_SITE_URL ? new URL(SITE_URL) : undefined,
   title: {
-    default: `三軒茶屋のたこ焼き・ちょい飲み居酒屋｜${SITE_NAME}`,
+    default: `三軒茶屋のたこ焼き居酒屋｜一杯とつまみの寄り道処 ${SITE_NAME}`,
     template: `%s｜${SITE_NAME}`,
   },
   description: DESCRIPTION,
@@ -35,6 +35,8 @@ export const metadata: Metadata = {
     '三軒茶屋 居酒屋',
     '三軒茶屋 ちょい飲み',
     '三軒茶屋 立ち飲み',
+    '三軒茶屋 二軒目',
+    '三軒茶屋 サク飲み',
     '三軒茶屋 一人飲み',
     '三軒茶屋 せんべろ',
     '太子堂 居酒屋',
@@ -49,7 +51,7 @@ export const metadata: Metadata = {
         type: 'website',
         locale: 'ja_JP',
         siteName: `${SITE_NAME_FULL}`,
-        title: `三軒茶屋のたこ焼き・ちょい飲み居酒屋｜${SITE_NAME}`,
+        title: `三軒茶屋のたこ焼き居酒屋｜一杯とつまみの寄り道処 ${SITE_NAME}`,
         description: DESCRIPTION,
         url: '/',
         images: [{ url: '/og-image.jpg', width: 1200, height: 630, alt: 'ヤング軒 三軒茶屋' }],
@@ -58,7 +60,7 @@ export const metadata: Metadata = {
   twitter: HAS_SITE_URL
     ? {
         card: 'summary_large_image',
-        title: `三軒茶屋のたこ焼き・ちょい飲み居酒屋｜${SITE_NAME}`,
+        title: `三軒茶屋のたこ焼き居酒屋｜一杯とつまみの寄り道処 ${SITE_NAME}`,
         description: DESCRIPTION,
         images: ['/og-image.jpg'],
       }

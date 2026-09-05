@@ -52,7 +52,7 @@ export const restaurantJsonLd = () =>
     name: SITE_NAME,
     alternateName: SITE_NAME_FULL,
     description:
-      'ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分の、たこ焼きとお酒を楽しめる立ち飲み処です。仕事帰りの一杯や一人飲み、二軒目の寄り道にも使えます。',
+      'ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。たこ焼き6個700円、ドリンク各500円、たこ焼き三種盛とドリンクの寄り道セット990円。店先のカウンターでお酒とおつまみを楽しめます。仕事帰りの一杯や一人飲み、二軒目の寄り道にも。',
     slogan: SITE_TAGLINE,
     url: absoluteUrl('/'),
     address: postalAddress(),

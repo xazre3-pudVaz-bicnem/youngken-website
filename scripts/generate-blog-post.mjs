@@ -24,7 +24,7 @@ const MAX_ATTEMPTS = 3;
 const STORE_FACTS = `
 【ヤング軒の確定情報 / これ以外の事実を書いてはいけない】
 - 店名：ヤング軒（正式には「おいしい寄り道 ヤング軒」）
-- 業態：たこ焼きと立ち飲み（居酒屋・ちょい飲み・一人飲み・二軒目利用）
+- 業態：たこ焼きを名物にした小さな飲み屋。店先のカウンターでお酒とおつまみを楽しめる（居酒屋・ちょい飲み・一人飲み・二軒目利用）。店頭の貼り紙は「立ち飲みもやってるよ！」、提灯は「立呑」
 - 住所：〒154-0004 東京都世田谷区太子堂4丁目5-1 スーパーヘアーヤング内
 - アクセス：東急田園都市線・東急世田谷線 三軒茶屋駅から徒歩約4分
 - 営業時間：16:00〜22:00
@@ -34,14 +34,15 @@ const STORE_FACTS = `
 - 当店オリジナル：きざみワサビ（価格は店頭表示。金額を書かないこと）
 - 寄り道セット：たこ焼き三種盛（ソースマヨネーズ・岩塩ペッパー・きざみワサビ）＋お好きなドリンク1杯で990円（税込）
 - ドリンク：各500円。ヤングハイボール（ジンジャー／自家製ジンジャーが香る）、角ハイボール、レモンサワー、ウーロンハイ、緑茶ハイ、缶ビール
-- おつまみ：焼き鳥・鯖・いかなどの缶つまみを棚に常備（銘柄は書かない）
-- スタイル：立ち飲み。たこ焼きのテイクアウト可
+- おつまみ：黒板に「きゅうりの旨キムチ」。棚に焼き鳥・鯖・いか・赤貝などの缶つまみ（銘柄は書かない）。おつまみの価格は未確認なので金額を書かない
+- スタイル：店先のカウンターで立ち飲み。たこ焼きのテイクアウト可
 - 歴史：同じ場所にある理髪店「スーパーヘアーヤング」は1923年創業で4世代続く。もともとの屋号が「ヤング軒」で、昭和40年に二代目が渡米を経験したことをきっかけに「スーパーヘアーヤング」へ改名。創業100年の節目に三代目が立ち飲み処「ヤング軒」を開いた
 `.trim();
 
 const FORBIDDEN = `
 【厳守】
 - 上の確定情報に無い事実（席数・予約・喫煙可否・電話番号・SNS・クーポン・キャンペーン・受賞歴・具体的な待ち時間・食感や味の断定的な描写）を書かない
+- 着席できる席の有無は未確認。「席がない」「カウンターだけ」「立ち飲み専門」「席を待つ必要がない」のように席を否定する断定を書かない
 - 他店の店名・価格・評判を書かない。三軒茶屋の他の店を具体名で紹介しない
 - 存在しないメニュー・サービス・イベントを作らない
 - 営業時間・定休日・価格を推測で変えない。書くときは確定情報のまま書く
@@ -78,6 +79,11 @@ const TOPICS = [
   { slug: 'sangenjaya-yasui-izakaya', title: '三軒茶屋で安く飲みたいときに', intent: '三軒茶屋 安い 居酒屋', category: 'ちょい飲み', links: ['/drink', '/menu'] },
   { slug: 'saku-nomi-no-susume', title: 'サク飲みのすすめ', intent: '三軒茶屋 サク飲み', category: 'ちょい飲み', links: ['/drink', '/about'] },
   { slug: 'toko-ya-to-machi', title: '床屋が街の寄り合い所だった頃', intent: '床屋 街 コミュニティ', category: '三軒茶屋の街', links: ['/barber', '/about'] },
+  { slug: 'sangenjaya-izakaya-erabi', title: '三軒茶屋で居酒屋を選ぶときに見ていること', intent: '三軒茶屋 居酒屋', category: '居酒屋', links: ['/menu', '/drink'] },
+  { slug: 'chiisana-izakaya', title: '小さな店で飲むということ', intent: '三軒茶屋 小さい 居酒屋', category: '居酒屋', links: ['/about', '/menu'] },
+  { slug: 'tsumami-to-ippai', title: 'つまみ一品と、お酒一杯', intent: '三軒茶屋 おつまみ 居酒屋', category: '居酒屋', links: ['/menu', '/drink'] },
+  { slug: 'kyuri-no-kimchi', title: 'きゅうりの旨キムチという一品', intent: 'きゅうり キムチ つまみ', category: '居酒屋', links: ['/menu', '/drink'] },
+  { slug: 'sangenjaya-yoru-hitori-gohan', title: '三軒茶屋でひとりの夜ごはんに困ったら', intent: '三軒茶屋 一人 ごはん 夜', category: '一人飲み', links: ['/menu', '/access'] },
 ];
 
 /* ------------------------------------------------------------------ *
@@ -125,7 +131,8 @@ const similarity = (a, b) => {
  * 生成
  * ------------------------------------------------------------------ */
 const buildPrompt = (topic, existingTitles) => `
-あなたは、東京・三軒茶屋のたこ焼き店兼立ち飲み処「ヤング軒」の店主に代わって、公式サイトのブログを書くライターです。
+あなたは、東京・三軒茶屋にある「ヤング軒」の店主に代わって、公式サイトのブログを書くライターです。
+ヤング軒はたこ焼きを名物にした小さな飲み屋で、店先のカウンターでお酒とおつまみも楽しめます。
 
 ${STORE_FACTS}
 
@@ -199,36 +206,27 @@ const extractJson = (text) => {
   return JSON.parse(raw.slice(start, end + 1));
 };
 
-async function main() {
-  const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey && !process.env.DRY_RUN_FIXTURE) {
-    console.error('ANTHROPIC_API_KEY が設定されていません。');
-    process.exit(1);
-  }
-
-  fs.mkdirSync(BLOG_DIR, { recursive: true });
+/** 記事を1本つくって書き出す。成功したら slug、テーマ切れなら null を返す。 */
+async function generateOne(client, date) {
   const existing = readExisting();
   const usedSlugs = new Set(existing.map((p) => p.slug.replace(/^\d{4}-\d{2}-\d{2}-/, '')));
-
   const candidates = TOPICS.filter((t) => !usedSlugs.has(t.slug));
+
   if (candidates.length === 0) {
     console.log('未使用のテーマがありません。TOPICS を追加してください。');
-    process.exit(0);
+    return null;
   }
-
-  const date = todayIso();
   if (existing.some((p) => p.slug.startsWith(date))) {
-    console.log(`${date} の記事はすでに存在します。何もしません。`);
-    process.exit(0);
+    console.log(`${date} の記事はすでに存在します。スキップします。`);
+    return null;
   }
 
   const topic = candidates[Math.floor(Math.random() * candidates.length)];
-  const client = apiKey ? new Anthropic({ apiKey }) : null;
   const existingTitles = existing.map((p) => p.title).filter(Boolean);
 
   let article = null;
   for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt += 1) {
-    console.log(`生成中 (${attempt}/${MAX_ATTEMPTS}): ${topic.title}`);
+    console.log(`生成中 (${attempt}/${MAX_ATTEMPTS}) ${date}: ${topic.title}`);
 
     // DRY_RUN_FIXTURE を指定するとAPIを呼ばずに、検証〜書き出しだけを確認できる
     const text = process.env.DRY_RUN_FIXTURE
@@ -256,10 +254,7 @@ async function main() {
       continue;
     }
 
-    const worst = existing.reduce(
-      (max, p) => Math.max(max, similarity(data.body, p.body)),
-      0,
-    );
+    const worst = existing.reduce((max, p) => Math.max(max, similarity(data.body, p.body)), 0);
     if (worst > MAX_SIMILARITY) {
       console.warn(`  既存記事と似すぎ (${worst.toFixed(2)})`);
       continue;
@@ -269,10 +264,7 @@ async function main() {
     break;
   }
 
-  if (!article) {
-    console.error('有効な記事を生成できませんでした。');
-    process.exit(1);
-  }
+  if (!article) throw new Error(`有効な記事を生成できませんでした（${topic.title}）`);
 
   // 直近の記事2本を関連記事として紐づける
   const related = existing
@@ -294,10 +286,77 @@ async function main() {
     '',
   ].join('\n');
 
-  const file = path.join(BLOG_DIR, `${slug}.md`);
-  fs.writeFileSync(file, `${frontmatter}${article.body.trim()}\n`, 'utf8');
+  fs.writeFileSync(
+    path.join(BLOG_DIR, `${slug}.md`),
+    `${frontmatter}${article.body.trim()}\n`,
+    'utf8',
+  );
   console.log(`書き出しました: content/blog/${slug}.md`);
   console.log(`  ${article.title}`);
+  return slug;
+}
+
+/** 直近の記事日付から今日までの、まだ記事がない日を古い順に返す（最大 max 件） */
+function missingDates(max) {
+  const existing = readExisting();
+  const have = new Set(existing.map((p) => p.slug.slice(0, 10)));
+  const today = todayIso();
+
+  const out = [];
+  const cursor = new Date(`${today}T00:00:00Z`);
+  cursor.setUTCDate(cursor.getUTCDate() - (max - 1));
+
+  while (out.length < max) {
+    const iso = cursor.toISOString().slice(0, 10);
+    if (!have.has(iso)) out.push(iso);
+    if (iso === today) break;
+    cursor.setUTCDate(cursor.getUTCDate() + 1);
+  }
+  return out;
+}
+
+async function main() {
+  const apiKey = process.env.ANTHROPIC_API_KEY;
+  if (!apiKey && !process.env.DRY_RUN_FIXTURE) {
+    console.error(
+      [
+        'ANTHROPIC_API_KEY が設定されていません。',
+        'GitHub のリポジトリ設定 > Secrets and variables > Actions に',
+        'ANTHROPIC_API_KEY を登録してください。',
+      ].join('\n'),
+    );
+    process.exit(1);
+  }
+
+  fs.mkdirSync(BLOG_DIR, { recursive: true });
+
+  // POSTS=3 のように指定すると、記事のない直近の日を古い順に埋める（取りこぼしの追いつき用）
+  const requested = Math.max(1, Math.min(7, Number(process.env.POSTS || 1) || 1));
+  const dates = requested === 1 ? [todayIso()] : missingDates(requested);
+
+  if (dates.length === 0) {
+    console.log('追加する日がありません。');
+    return;
+  }
+
+  const client = apiKey ? new Anthropic({ apiKey }) : null;
+  const written = [];
+
+  for (const date of dates) {
+    try {
+      const slug = await generateOne(client, date);
+      if (slug !== null) written.push(slug);
+    } catch (err) {
+      // 複数日を埋めている途中の失敗は、その日だけ諦めて次へ進む
+      if (dates.length === 1) throw err;
+      console.warn(`  ${date} は生成できませんでした: ${err.message}`);
+    }
+  }
+
+  if (written.length === 0 && dates.length === 1) {
+    throw new Error('記事を生成できませんでした。');
+  }
+  console.log(written.length ? `${written.length}本を追加しました。` : '追加はありませんでした。');
 }
 
 main().catch((err) => {
