@@ -8,9 +8,9 @@ import { SCENES } from '@/lib/content';
 const SCENE_PHOTOS = [
   PHOTOS.storefront,
   PHOTOS.staffCounter,
-  PHOTOS.takoyakiMayo2,
-  PHOTOS.takoyakiWasabi,
-  PHOTOS.signboardSet,
+  PHOTOS.takoyakiWasabiHighball,
+  PHOTOS.takoyakiMix,
+  PHOTOS.takoyakiSanshu,
   PHOTOS.exteriorWide,
 ];
 
@@ -32,7 +32,7 @@ export function ChoinomiSection() {
             </h2>
           </div>
           <p className="mt-7 max-w-md text-[0.93rem] leading-[2.15] text-paper/75 lg:mt-0">
-            三軒茶屋で軽く飲みたい夜に。ドリンクは各500円、寄り道セットは990円。こんな使われ方をしています。
+            三軒茶屋で軽く飲みたい夜に。ビールは500円から、寄り道セットは税込1,200円。こんな使われ方をしています。
           </p>
         </Reveal>
 

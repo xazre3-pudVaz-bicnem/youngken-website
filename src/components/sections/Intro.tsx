@@ -4,10 +4,10 @@ import { Eyebrow } from '@/components/ui/SectionTitle';
 import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { PHOTOS } from '@/lib/photos';
-import { QUICK_FACTS } from '@/lib/site';
+import { ACCESS, QUICK_FACTS, SERVICE } from '@/lib/site';
 
 /**
- * ヒーロー直下。5秒で「三軒茶屋の、たこ焼きが名物の小さな飲み屋」だと分かるようにする。
+ * ヒーロー直下。5秒で「三軒茶屋の、たこ焼きが名物の寄り道どころ」だと分かるようにする。
  * 詳細は /about /menu /drink へ渡し、ここでは短く。
  */
 export function Intro() {
@@ -39,19 +39,18 @@ export function Intro() {
             <h2 className="mt-6 font-mincho text-[1.7rem] leading-[1.65] tracking-[0.05em] text-sumi sm:text-[2.1rem] lg:text-[2.4rem]">
               たこ焼きが名物の、
               <br />
-              三軒茶屋の小さな飲み屋。
+              三軒茶屋の寄り道どころ。
             </h2>
-            <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2 sm:text-base">
+            <div className="mt-9 space-y-5 text-[0.95rem] leading-[2.15] text-sumi-2 sm:text-base">
               <p>
-                ヤング軒は、東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分にあります。焼きたてのたこ焼きをつまみに、ハイボールやサワーを一杯。おつまみもお酒も、居酒屋のようにその場で楽しめます。
+                {ACCESS.station}から徒歩約{ACCESS.walkMinutes}分、{ACCESS.road}
+                沿いにあります。焼きたてのたこ焼きをつまみに、まず一杯。
               </p>
-              <p>
-                持ち帰りだけの方もいれば、そのままカウンターで飲んでいく方もいます。一人でも、二人でも、仕事帰りの三十分でも。三軒茶屋の夜の、寄り道処として使ってください。
-              </p>
+              <p>{SERVICE.tv}</p>
             </div>
 
             <ul className="mt-9 flex flex-wrap gap-x-3 gap-y-3 font-gothic text-[0.75rem] tracking-[0.1em] text-sumi-2">
-              {['たこ焼き', 'お酒と一品', 'ちょい飲み', '一人飲み', '二軒目', 'テイクアウト'].map(
+              {['たこ焼き', 'お酒と一品', 'ちょい飲み', '一人飲み', 'スポーツ観戦', 'テイクアウト'].map(
                 (tag) => (
                   <li key={tag} className="border border-rule px-3.5 py-1.5">
                     {tag}
@@ -72,13 +71,13 @@ export function Intro() {
 
           <Reveal delay={120}>
             <Photo
-              photo={PHOTOS.staffCounter}
-              ratio="landscape"
+              photo={PHOTOS.counterTv}
+              ratio="wide"
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="shadow-[0_18px_48px_-28px_rgba(32,27,23,0.55)]"
             />
             <p className="mt-4 font-gothic text-[0.72rem] leading-relaxed tracking-[0.08em] text-sumi-3">
-              カウンター越しに、今日のたこ焼きとお酒を。
+              カウンター越しのテレビで、試合を観ながら一杯。
             </p>
           </Reveal>
         </div>

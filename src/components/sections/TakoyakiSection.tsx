@@ -4,7 +4,7 @@ import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { Eyebrow } from '@/components/ui/SectionTitle';
 import { PHOTOS } from '@/lib/photos';
-import { TAKOYAKI_BASE } from '@/lib/menu';
+import { TAKOYAKI_BASE, TAKOYAKI_STORY } from '@/lib/menu';
 
 /** TOPでは写真と要点だけ。味の一覧は /takoyaki と /menu に置く。 */
 export function TakoyakiSection() {
@@ -18,16 +18,22 @@ export function TakoyakiSection() {
               一つずつ、返して焼く。
             </h2>
           </div>
-          <p className="mt-7 max-w-md text-[0.95rem] leading-[2.15] text-sumi-2 lg:mt-0">
-            注文を受けてから鉄板に流し、目の前で焼き上げます。6個{TAKOYAKI_BASE.price}
-            円。ソース系と岩塩系、それに当店オリジナルのきざみワサビから選べます。
-          </p>
+          <div className="mt-7 max-w-md space-y-4 text-[0.95rem] leading-[2.15] text-sumi-2 lg:mt-0">
+            <p>
+              たこ焼きは、{TAKOYAKI_STORY.octopus}を使った、{TAKOYAKI_STORY.maker}
+              が焼く屋台のたこ焼きです。
+            </p>
+            <p>
+              外はカリッと、中はとろっと。店内ではアツアツの焼きたてが食べられます。6個
+              {TAKOYAKI_BASE.price}円から。
+            </p>
+          </div>
         </Reveal>
 
         <div className="mt-14 grid gap-5 sm:mt-20 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
           <Reveal className="lg:col-span-7">
             <Photo
-              photo={PHOTOS.takoyakiSauce}
+              photo={PHOTOS.takoyakiPepperLift}
               ratio="landscape"
               sizes="(min-width: 1024px) 56vw, (min-width: 640px) 50vw, 100vw"
             />

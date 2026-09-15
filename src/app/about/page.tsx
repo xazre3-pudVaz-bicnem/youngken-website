@@ -9,13 +9,13 @@ import { FaqList } from '@/components/ui/FaqList';
 import { NextLinks } from '@/components/ui/NextLinks';
 import { PHOTOS } from '@/lib/photos';
 import { MAIN_FAQ } from '@/lib/content';
-import { ACCESS, BARBER, HOURS, NAP } from '@/lib/site';
-import { DRINK_PRICE, TAKOYAKI_BASE, YORIMICHI_SET } from '@/lib/menu';
+import { ACCESS, BARBER, HOURS, NAP, SERVICE } from '@/lib/site';
+import { DRINK_GROUPS, TAKOYAKI_BASE, YORIMICHI_SET } from '@/lib/menu';
 
 export const metadata = pageMetadata({
   title: 'ヤング軒について｜三軒茶屋・太子堂のたこ焼きと一杯の店',
   description:
-    'ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。店の成り立ち、使い方、営業時間、百年続く床屋との関係をまとめました。',
+    'ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分の世田谷通り沿いにある、たこ焼きが名物の寄り道どころです。店の成り立ち、使い方、営業時間、百年続く床屋との関係をまとめました。',
   path: '/about',
 });
 
@@ -31,9 +31,10 @@ const FACTS = [
   { label: '定休日', value: HOURS.closedDisplay },
   {
     label: '価格帯',
-    value: `たこ焼き6個 ${TAKOYAKI_BASE.price}円／ドリンク各 ${DRINK_PRICE}円／寄り道セット ${YORIMICHI_SET.price}円`,
+    value: `たこ焼き6個 ${TAKOYAKI_BASE.price}円〜／${DRINK_GROUPS.map((g) => `${g.label} ${g.price}円`).join('／')}／寄り道セット ${YORIMICHI_SET.price.toLocaleString('ja-JP')}円（${YORIMICHI_SET.taxNote}）`,
   },
-  { label: 'スタイル', value: '店先のカウンターで立ち飲み／たこ焼きのテイクアウト可' },
+  { label: 'スタイル', value: SERVICE.styleLabel },
+  { label: '店内', value: SERVICE.tv },
 ];
 
 export default function AboutPage() {
@@ -50,7 +51,7 @@ export default function AboutPage() {
         }
         lead={
           <p>
-            ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。焼きたてのたこ焼きやおつまみをつまみながら、ハイボールやサワーを一杯。一人でも、二人でも、仕事帰りの一杯にも使えます。
+            ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分の世田谷通り沿いにある、たこ焼きが名物の寄り道どころです。焼きたてのたこ焼きやおつまみをつまみながら、ハイボールやサワーを一杯。一人でも、二人でも、仕事帰りの一杯にも使えます。
           </p>
         }
         trail={[{ name: 'ヤング軒について', href: '/about' }]}
@@ -90,8 +91,9 @@ export default function AboutPage() {
               <SectionTitle eyebrow="Style">飲む店としての、間口。</SectionTitle>
               <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
                 <p>
-                  主役は店先のカウンターです。焼き上がったたこ焼きをつまみながら、ハイボールやサワーを一杯。それだけで一晩ぶんになります。
+                  主役は店内のカウンターです。焼き上がったたこ焼きをつまみながら、ハイボールやサワーを一杯。それだけで一晩ぶんになります。
                 </p>
+                <p>{SERVICE.tv}</p>
                 <p>
                   頼むものが決まっているので、時間が読めます。三軒茶屋で待ち合わせまで二十分あるとき。一軒目のあとに、もう少しだけ話したいとき。家に帰る前に、今日を一度区切りたいとき。そういう夜のための店です。
                 </p>
@@ -116,8 +118,8 @@ export default function AboutPage() {
                 sizes="(min-width: 1024px) 46vw, 100vw"
               />
               <Photo
-                photo={PHOTOS.takoyakiSauce}
-                ratio="landscape"
+                photo={PHOTOS.counterTv}
+                ratio="wide"
                 sizes="(min-width: 1024px) 46vw, 100vw"
                 className="mt-5"
               />
@@ -133,7 +135,7 @@ export default function AboutPage() {
             <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
               <p>
                 ヤング軒があるのは、三軒茶屋で{BARBER.foundedYear}年から
-                {BARBER.generations}世代続く理髪店「{BARBER.name}」の店内です。そしてその理髪店のいちばん最初の屋号が、「ヤング軒」でした。
+                {BARBER.generations}世代続く理髪店「{BARBER.name}」の店内です。そしてその理髪店のいちばん最初の屋号が、「{BARBER.originalName}」でした。
               </p>
               <p>
                 髪を切りに来る人と、一杯飲みに来る人。人が集まる場所であることは、百年前から変わっていません。
@@ -157,12 +159,12 @@ export default function AboutPage() {
           {
             href: '/takoyaki',
             label: '三軒茶屋のたこ焼き',
-            body: '6個700円。味の選び方と、焼き上がりまでの過ごし方。',
+            body: '北海道産の大だこを使った、屋台のたこ焼きのこと。',
           },
           {
             href: '/drink',
             label: 'ちょい飲み・一人飲み',
-            body: '990円の寄り道セットと、500円のドリンクのこと。',
+            body: '税込1,200円の寄り道セットと、お酒のこと。',
           },
           {
             href: '/access',

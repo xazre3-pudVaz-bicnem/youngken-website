@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# 元写真（最適化前）。public/photos へは npm run photos:prepare で書き出す
+/photo-originals/

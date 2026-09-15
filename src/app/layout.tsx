@@ -20,7 +20,7 @@ import { jsonLdScript, restaurantJsonLd, websiteJsonLd } from '@/lib/jsonld';
 const FONT_CSS = '/fonts/shippori-mincho-b1.css';
 
 const DESCRIPTION =
-  '三軒茶屋・太子堂のヤング軒。焼きたてのたこ焼き6個700円をつまみに、ハイボールやサワーを各500円で。寄り道セット990円。仕事帰りの一杯や一人飲み、二軒目にも。三軒茶屋駅から徒歩約4分、16時から22時まで営業。';
+  '三軒茶屋・太子堂のヤング軒。焼きたてのたこ焼きは6個700円から、ビール500円、ハイボール600円。寄り道セットは税込1,200円。仕事帰りの一杯や一人飲みにも。三軒茶屋駅から徒歩約4分、16時から22時まで営業。';
 
 export const metadata: Metadata = {
   metadataBase: HAS_SITE_URL ? new URL(SITE_URL) : undefined,

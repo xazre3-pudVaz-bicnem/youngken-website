@@ -9,7 +9,17 @@ import {
   SITE_URL,
   absoluteUrl,
 } from './site';
-import { DRINK_PRICE, TAKOYAKI_BASE, YORIMICHI_SET } from './menu';
+import { DRINK_GROUPS, TAKOYAKI_BASE, TAKOYAKI_FLAVORS, YORIMICHI_SET } from './menu';
+
+/** たこ焼きの味を価格ごとにまとめる（700円の味／800円の味） */
+const takoyakiPriceGroups = () => {
+  const byPrice = new Map<number, string[]>();
+  for (const f of TAKOYAKI_FLAVORS) {
+    if (f.price === null) continue;
+    byPrice.set(f.price, [...(byPrice.get(f.price) ?? []), f.name]);
+  }
+  return [...byPrice].map(([price, names]) => ({ price, names }));
+};
 
 /** 事実確認できた情報だけで構成する。未確認の項目（電話番号・SNS・座標）は出さない。 */
 
@@ -52,7 +62,7 @@ export const restaurantJsonLd = () =>
     name: SITE_NAME,
     alternateName: SITE_NAME_FULL,
     description:
-      'ヤング軒は東京都世田谷区太子堂、東急田園都市線 三軒茶屋駅から徒歩約4分にある、たこ焼きが名物の小さな飲み屋です。たこ焼き6個700円、ドリンク各500円、たこ焼き三種盛とドリンクの寄り道セット990円。店先のカウンターでお酒とおつまみを楽しめます。仕事帰りの一杯や一人飲み、二軒目の寄り道にも。',
+      'ヤング軒は東京都世田谷区太子堂、三軒茶屋駅から徒歩約4分の世田谷通り沿いにある、たこ焼きが名物の寄り道どころです。北海道産の大だこを使ったたこ焼きは6個700円から。ビール500円、ハイボール・サワー600円。たこ焼き三種盛りとドリンク1杯の寄り道セットは税込1,200円。店内のカウンターでお酒とおつまみを楽しめます。',
     slogan: SITE_TAGLINE,
     url: absoluteUrl('/'),
     address: postalAddress(),
@@ -70,24 +80,24 @@ export const restaurantJsonLd = () =>
       ? [absoluteUrl('/photos/storefront.jpg'), absoluteUrl('/photos/takoyaki-sauce.jpg')]
       : undefined,
     makesOffer: [
-      {
+      ...takoyakiPriceGroups().map((g) => ({
         '@type': 'Offer',
-        name: `${TAKOYAKI_BASE.label}`,
-        price: String(TAKOYAKI_BASE.price),
+        name: `${TAKOYAKI_BASE.label}／${g.names.join('・')}`,
+        price: String(g.price),
         priceCurrency: 'JPY',
-      },
+      })),
       {
         '@type': 'Offer',
         name: `${YORIMICHI_SET.name}（${YORIMICHI_SET.itemsLabel}＋${YORIMICHI_SET.drinkLabel}）`,
         price: String(YORIMICHI_SET.price),
         priceCurrency: 'JPY',
       },
-      {
+      ...DRINK_GROUPS.map((g) => ({
         '@type': 'Offer',
-        name: 'ドリンク各種',
-        price: String(DRINK_PRICE),
+        name: g.label,
+        price: String(g.price),
         priceCurrency: 'JPY',
-      },
+      })),
     ],
   });
 

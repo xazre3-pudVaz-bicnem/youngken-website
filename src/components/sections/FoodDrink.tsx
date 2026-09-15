@@ -4,7 +4,7 @@ import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { SectionTitle } from '@/components/ui/SectionTitle';
 import { PHOTOS } from '@/lib/photos';
-import { DRINKS, DRINK_PRICE, SNACKS } from '@/lib/menu';
+import { DRINK_GROUPS, SNACKS, formatPrice } from '@/lib/menu';
 
 /** 「たこ焼き屋」ではなく「飲める店」だと伝える節。おつまみとお酒を並べて見せる。 */
 export function FoodDrink() {
@@ -16,7 +16,7 @@ export function FoodDrink() {
             eyebrow="Food & Drink"
             lead={
               <p>
-                たこ焼きを待つあいだの一品と、それに合わせる一杯。三軒茶屋で軽く飲みたい夜の、ちょうどいい量にしてあります。
+                たこ焼きに添える一品と、それに合わせる一杯。三軒茶屋で軽く飲みたい夜の、ちょうどいい量にしてあります。
               </p>
             }
           >
@@ -60,23 +60,24 @@ export function FoodDrink() {
                   Drink
                 </p>
                 <p className="mt-5 font-mincho text-[1.2rem] tracking-[0.06em] text-sumi">
-                  どれを選んでも、
-                  <span className="tcy mx-0.5">{DRINK_PRICE}</span>円。
+                  たこ焼きに、一杯。
                 </p>
                 <ul className="mt-6 border-t border-rule">
-                  {DRINKS.map((drink) => (
-                    <li
-                      key={drink.name}
-                      className="flex items-baseline justify-between gap-4 border-b border-rule py-3.5"
-                    >
-                      <span className="font-gothic text-[0.88rem] tracking-[0.06em] text-sumi">
-                        {drink.name}
-                      </span>
-                      {drink.note ? (
-                        <span className="shrink-0 font-gothic text-[0.68rem] tracking-[0.08em] text-sumi-3">
-                          {drink.note}
+                  {DRINK_GROUPS.map((group) => (
+                    <li key={group.key} className="border-b border-rule py-3.5">
+                      <p className="flex items-baseline justify-between gap-4 font-gothic text-[0.88rem] tracking-[0.06em] text-sumi">
+                        {group.label}
+                        <span className="shrink-0 text-[0.8rem] text-sumi-3">
+                          {formatPrice(group.price)}
                         </span>
-                      ) : null}
+                      </p>
+                      <p className="mt-1.5 font-gothic text-[0.72rem] leading-[1.8] tracking-[0.06em] text-sumi-3">
+                        {group.items
+                          .slice(0, 3)
+                          .map((item) => item.name)
+                          .join('・')}
+                        {group.items.length > 3 ? 'ほか' : ''}
+                      </p>
                     </li>
                   ))}
                 </ul>
@@ -98,10 +99,13 @@ export function FoodDrink() {
 
           <Reveal delay={120}>
             <Photo
-              photo={PHOTOS.takoyakiSalt}
+              photo={PHOTOS.otsumamiSet}
               ratio="portrait"
               sizes="(min-width: 1024px) 44vw, 100vw"
             />
+            <p className="mt-4 font-gothic text-[0.72rem] leading-relaxed tracking-[0.08em] text-sumi-3">
+              たこ焼きの三種盛りと、セロリ漬け、山形名物のすもっち。
+            </p>
           </Reveal>
         </div>
       </Container>

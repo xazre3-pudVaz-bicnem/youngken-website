@@ -141,12 +141,12 @@ export default async function BlogPostPage({ params }: { params: Promise<Params>
           {
             href: '/drink',
             label: 'ちょい飲み・一人飲み',
-            body: '三軒茶屋で軽く一杯。990円の寄り道セット。',
+            body: '三軒茶屋で軽く一杯。税込1,200円の寄り道セット。',
           },
           {
             href: '/takoyaki',
             label: 'たこ焼き',
-            body: '6個700円。味は黒板から選べます。',
+            body: '6個700円から。味は8種類。',
           },
           {
             href: '/blog',

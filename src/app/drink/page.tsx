@@ -9,13 +9,19 @@ import { FaqList } from '@/components/ui/FaqList';
 import { NextLinks } from '@/components/ui/NextLinks';
 import { PHOTOS } from '@/lib/photos';
 import { DRINK_FAQ } from '@/lib/content';
-import { DRINKS, DRINK_PRICE, TAKOYAKI_BASE, YORIMICHI_SET } from '@/lib/menu';
-import { ACCESS, HOURS } from '@/lib/site';
+import {
+  DRINK_GROUPS,
+  DRINK_PRICE_FROM,
+  TAKOYAKI_BASE,
+  YORIMICHI_SET,
+  formatPrice,
+} from '@/lib/menu';
+import { ACCESS, HOURS, SERVICE } from '@/lib/site';
 
 export const metadata = pageMetadata({
   title: '三軒茶屋でちょい飲み・一人飲み・せんべろ｜ヤング軒',
   description:
-    '三軒茶屋で軽く一杯飲みたい夜に。ヤング軒はドリンク各500円、たこ焼き三種盛とドリンク1杯の寄り道セットが990円。千円あればひととおり足ります。仕事帰りの一杯、一人飲み、二軒目、せんべろ的な使い方まで。',
+    '三軒茶屋で軽く一杯飲みたい夜に。ヤング軒はビール500円、ハイボールやサワー600円。たこ焼き三種盛りとドリンク1杯の寄り道セットは税込1,200円。仕事帰りの一杯、一人飲み、二軒目、スポーツ観戦しながらの一杯まで。',
   path: '/drink',
 });
 
@@ -36,6 +42,14 @@ const CASES = [
     title: '二軒目として',
     body: '一軒目のあと、締めるにはまだ早いとき。たこ焼き六個とハイボールくらいが、ちょうど足ります。営業は22時までです。',
   },
+  {
+    title: 'スポーツを観ながら',
+    body: `${SERVICE.tv}焼きたてのたこ焼きをつまみながら、一人でも、仲間とでも。`,
+  },
+  {
+    title: 'セットで、迷わず',
+    body: `たこ焼き三種盛りにお好きなドリンクが1杯ついた寄り道セットが${YORIMICHI_SET.taxNote}${YORIMICHI_SET.price.toLocaleString('ja-JP')}円。何を頼むか決めずに入っても、これで始められます。`,
+  },
 ];
 
 export default function DrinkPage() {
@@ -52,13 +66,16 @@ export default function DrinkPage() {
         }
         lead={
           <p>
-            ヤング軒は、三軒茶屋・太子堂で料理とお酒を気軽に楽しめる小さな店です。店先のカウンターで立ち飲みもできます。ドリンクは各{DRINK_PRICE}
-            円、たこ焼きは6個{TAKOYAKI_BASE.price}円。たこ焼き三種盛にお好きなドリンクが1杯ついた寄り道セットなら
-            {YORIMICHI_SET.price}円（{YORIMICHI_SET.taxNote}）です。
+            ヤング軒は、三軒茶屋・太子堂でたこ焼きとお酒を気軽に楽しめる小さな店です。店内のカウンターで立ち飲みもできます。ビールは{DRINK_PRICE_FROM}
+            円から、たこ焼きは6個{TAKOYAKI_BASE.price}
+            円から。たこ焼き三種盛りにお好きなドリンクが1杯ついた寄り道セットなら
+            {YORIMICHI_SET.taxNote}
+            {YORIMICHI_SET.price.toLocaleString('ja-JP')}円です。
           </p>
         }
         trail={[{ name: 'ちょい飲み・一人飲み', href: '/drink' }]}
-        photo={PHOTOS.exteriorNight}
+        photo={PHOTOS.counterTv}
+        photoPosition="88% 50%"
       />
 
       <Section tone="paper">
@@ -68,7 +85,7 @@ export default function DrinkPage() {
               eyebrow="Cases"
               lead={
                 <p>
-                  三軒茶屋で軽く飲みたいとき、ヤング軒がどう使われているか。実際に多い四つの使い方です。
+                  三軒茶屋で軽く飲みたいとき、ヤング軒がどう使われているか。よくある六つの使い方です。
                 </p>
               }
             >
@@ -93,39 +110,36 @@ export default function DrinkPage() {
         <Container size="wide">
           <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
             <Reveal>
-              <SectionTitle eyebrow="Price">千円で、足りる。</SectionTitle>
+              <SectionTitle eyebrow="Price">値段が、読める。</SectionTitle>
               <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
                 <p>
-                  寄り道セットは{YORIMICHI_SET.price}円（{YORIMICHI_SET.taxNote}）。
-                  {YORIMICHI_SET.itemsLabel}（{YORIMICHI_SET.items.join('・')}）に、
-                  {YORIMICHI_SET.drinkLabel}がつきます。三軒茶屋でせんべろを探している方にも、値段の見当がつきやすい一皿です。
+                  ビールは{DRINK_PRICE_FROM}円、ハイボールやサワーは600円。二杯目を足すときも、頭の中で計算が終わります。
                 </p>
                 <p>
-                  単品なら、ドリンクが各{DRINK_PRICE}円、たこ焼きが6個{TAKOYAKI_BASE.price}
-                  円。飲み足りなければ二杯目を足す、というだけの分かりやすさにしています。
+                  寄り道セットは{YORIMICHI_SET.taxNote}
+                  {YORIMICHI_SET.price.toLocaleString('ja-JP')}円。{YORIMICHI_SET.itemsLabel}（
+                  {YORIMICHI_SET.items.join('・')}）に、{YORIMICHI_SET.drinkLabel}がつきます。
                 </p>
               </div>
 
-              <ul className="mt-10 border-t border-rule">
-                {DRINKS.map((d) => (
-                  <li
-                    key={d.name}
-                    className="flex items-baseline justify-between gap-6 border-b border-rule py-3.5"
-                  >
-                    <span className="font-gothic text-[0.9rem] tracking-[0.06em] text-sumi">
-                      {d.name}
-                      {d.note ? (
-                        <span className="ml-2 text-[0.72rem] tracking-[0.1em] text-sumi-3">
-                          （{d.note}）
-                        </span>
-                      ) : null}
-                    </span>
-                    <span className="shrink-0 font-gothic text-[0.8rem] text-sumi-3">
-                      {d.price}円
-                    </span>
-                  </li>
+              <dl className="mt-10 border-t border-rule">
+                {DRINK_GROUPS.map((g) => (
+                  <div key={g.key} className="border-b border-rule py-4">
+                    <dt className="flex items-baseline justify-between gap-6 font-gothic text-[0.9rem] tracking-[0.06em] text-sumi">
+                      {g.label}
+                      <span className="shrink-0 text-[0.8rem] text-sumi-3">
+                        {g.key === 'soft' ? '各' : ''}
+                        {formatPrice(g.price)}
+                      </span>
+                    </dt>
+                    <dd className="mt-2 font-gothic text-[0.76rem] leading-[1.9] tracking-[0.05em] text-sumi-3">
+                      {g.items
+                        .map((item) => (item.note ? `${item.name}（${item.note}）` : item.name))
+                        .join('／')}
+                    </dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
 
               <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3">
                 <Link href="/menu" className="prose-link font-gothic text-[0.85rem]">
@@ -139,9 +153,10 @@ export default function DrinkPage() {
 
             <Reveal delay={120}>
               <Photo
-                photo={PHOTOS.signboardSet}
-                ratio="portrait"
-                sizes="(min-width: 1024px) 46vw, 100vw"
+                photo={PHOTOS.menuDrink}
+                ratio="auto"
+                sizes="(min-width: 640px) 420px, 92vw"
+                className="mx-auto max-w-[26rem]"
               />
             </Reveal>
           </div>
@@ -154,7 +169,7 @@ export default function DrinkPage() {
             <SectionTitle eyebrow="Note">一人でも入りやすい理由</SectionTitle>
             <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
               <p>
-                ヤング軒は店先のカウンターが主役の小さな店です。長いコース料理はないので、注文してすぐ飲み始められて、切り上げたいときに切り上げられます。
+                ヤング軒は店内のカウンターが主役の小さな店です。長いコース料理はないので、注文してすぐ飲み始められて、切り上げたいときに切り上げられます。
               </p>
               <p>
                 たこ焼きが焼ける様子が目の前にあるので、一人でも手持ち無沙汰になりません。焼き手と少し話す人もいれば、黙って一杯だけ飲んで帰る人もいます。どちらでも大丈夫です。

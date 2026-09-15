@@ -10,10 +10,12 @@ import { NextLinks } from '@/components/ui/NextLinks';
 import { PHOTOS } from '@/lib/photos';
 import { MENU_FAQ } from '@/lib/content';
 import {
-  DRINKS,
-  DRINK_PRICE,
+  DRINK_GROUPS,
+  DRINK_PRICE_FROM,
+  SHOCHU,
   SNACKS,
   SNACKS_NOTE,
+  SWEETS,
   TAKOYAKI_BASE,
   TAKOYAKI_FLAVORS,
   YORIMICHI_SET,
@@ -24,7 +26,7 @@ import {
 export const metadata = pageMetadata({
   title: 'メニューと値段｜三軒茶屋で飲めるたこ焼き居酒屋 ヤング軒',
   description:
-    'ヤング軒のメニューと値段。たこ焼き6個700円（ソース・岩塩・きざみワサビ）、ドリンク各500円、寄り道セット990円、きゅうりの旨キムチや缶つまみも。三軒茶屋・太子堂で料理とお酒を気軽に楽しめる店の品書きです。',
+    'ヤング軒のメニューと値段。たこ焼き6個700円から（きざみワサビ・ガーリックマヨは800円）、ビール500円、ハイボール・サワー600円、寄り道セット税込1,200円。きゅうりの塩キムチ、セロリ漬け、すもっち、ピーチメルバも。',
   path: '/menu',
 });
 
@@ -46,10 +48,11 @@ function PriceRow({ item }: { item: MenuItem }) {
 }
 
 const BUDGET = [
-  { price: '500円', body: 'ドリンク1杯。仕事帰りに一杯だけ、という日に。' },
-  { price: '700円', body: 'たこ焼き6個。持ち帰りにもできます。' },
-  { price: '990円', body: '寄り道セット。たこ焼き三種盛とお好きなドリンク1杯。' },
-  { price: '1,500円前後', body: '寄り道セットにもう一杯と、一品を足したあたり。' },
+  { price: '350円', body: 'ソフトドリンク1杯。' },
+  { price: '500円', body: 'ビール1杯。仕事帰りに一杯だけ、という日に。' },
+  { price: '700円', body: 'たこ焼き6個（ソース・岩塩など）。持ち帰りにもできます。' },
+  { price: '1,200円', body: '寄り道セット。たこ焼き三種盛りとお好きなドリンク1杯（税込）。' },
+  { price: '1,800円前後', body: '寄り道セットに、ハイボールをもう一杯足したあたり。' },
 ];
 
 export default function MenuPage() {
@@ -66,9 +69,9 @@ export default function MenuPage() {
         }
         lead={
           <p>
-            ヤング軒の品書きです。たこ焼きは6個{TAKOYAKI_BASE.price}円、ドリンクは各
-            {DRINK_PRICE}
-            円。三軒茶屋で軽く飲みたい夜に、値段の見当がつくように組み立てています。価格はすべて店頭の掲示に準じます。
+            ヤング軒の品書きです。たこ焼きは6個{TAKOYAKI_BASE.price}円から、ビールは
+            {DRINK_PRICE_FROM}
+            円、ハイボールやサワーは600円。三軒茶屋で軽く飲みたい夜に、値段の見当がつくように組み立てています。価格はすべて店頭の掲示に準じます。
           </p>
         }
         trail={[{ name: 'メニュー', href: '/menu' }]}
@@ -78,12 +81,13 @@ export default function MenuPage() {
       {/* 寄り道セット */}
       <Section tone="paper">
         <Container size="wide">
-          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.05fr)] lg:gap-16">
+          <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
             <Reveal>
               <Photo
-                photo={PHOTOS.signboardSet}
-                ratio="portrait"
-                sizes="(min-width: 1024px) 44vw, 100vw"
+                photo={PHOTOS.yorimichiSetPoster}
+                ratio="auto"
+                sizes="(min-width: 640px) 420px, 92vw"
+                className="mx-auto max-w-[26rem]"
               />
             </Reveal>
             <Reveal delay={100}>
@@ -94,9 +98,25 @@ export default function MenuPage() {
                 {YORIMICHI_SET.name}
               </h2>
               <p className="mt-7 text-[0.95rem] leading-[2.15] text-sumi-2">
-                {YORIMICHI_SET.itemsLabel}（{YORIMICHI_SET.items.join('・')}）に、
-                {YORIMICHI_SET.drinkLabel}。まずこれを頼んで、足りなければ一杯足す。そういう頼み方をされる方が多いセットです。
+                当店一押しの{YORIMICHI_SET.itemsLabel}に、{YORIMICHI_SET.drinkLabel}
+                。まずこれを頼んで、足りなければ一杯足す。そういう頼み方をされる方が多いセットです。
               </p>
+              <dl className="mt-8 border-t border-rule text-[0.88rem]">
+                <div className="flex flex-col gap-1 border-b border-rule py-4 sm:flex-row sm:gap-8">
+                  <dt className="w-28 shrink-0 font-gothic text-[0.74rem] tracking-[0.12em] text-sumi-3">
+                    たこ焼き
+                  </dt>
+                  <dd className="text-sumi">
+                    {YORIMICHI_SET.items.join('・')}（{YORIMICHI_SET.itemsDetail}）
+                  </dd>
+                </div>
+                <div className="flex flex-col gap-1 border-b border-rule py-4 sm:flex-row sm:gap-8">
+                  <dt className="w-28 shrink-0 font-gothic text-[0.74rem] tracking-[0.12em] text-sumi-3">
+                    選べるドリンク
+                  </dt>
+                  <dd className="text-sumi">{YORIMICHI_SET.drinkChoices.join('／')}</dd>
+                </div>
+              </dl>
               <p className="mt-8 font-mincho text-sumi">
                 <span className="text-[2.6rem] leading-none text-enji sm:text-[3rem]">
                   {YORIMICHI_SET.price.toLocaleString('ja-JP')}
@@ -114,67 +134,86 @@ export default function MenuPage() {
       {/* 名物たこ焼き */}
       <Section tone="paper-2">
         <Container size="wide">
-          <Reveal>
-            <SectionTitle eyebrow="Takoyaki" as="h2">
-              名物のたこ焼き
-            </SectionTitle>
-            <p className="mt-8 max-w-2xl text-[0.95rem] leading-[2.15] text-sumi-2">
-              すべて6個入り{TAKOYAKI_BASE.price}
-              円。注文を受けてから鉄板に流して焼き上げます。店内で一杯やりながらでも、持ち帰りでも。
-            </p>
-          </Reveal>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-3 sm:gap-5">
+          <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] lg:gap-16">
             <Reveal>
-              <Photo
-                photo={PHOTOS.takoyakiSauce}
-                ratio="square"
-                sizes="(min-width: 640px) 31vw, 100vw"
-              />
-              <p className="mt-3 font-gothic text-[0.75rem] tracking-[0.08em] text-sumi-3">
-                ソース系
+              <SectionTitle eyebrow="Takoyaki" as="h2">
+                名物のたこ焼き
+              </SectionTitle>
+              <p className="mt-8 max-w-2xl text-[0.95rem] leading-[2.15] text-sumi-2">
+                北海道産の大だこを使った、屋台のたこ焼きです。すべて6個入り・
+                {TAKOYAKI_BASE.taxNote}。店内で一杯やりながらでも、持ち帰りでも。
               </p>
+              <ul className="mt-10 border-t border-rule">
+                {TAKOYAKI_FLAVORS.map((item) => (
+                  <PriceRow key={item.name} item={item} />
+                ))}
+              </ul>
+              <Link
+                href="/takoyaki"
+                className="prose-link mt-6 inline-block font-gothic text-[0.85rem]"
+              >
+                たこ焼きについて詳しく
+              </Link>
             </Reveal>
-            <Reveal delay={80}>
+
+            <Reveal delay={100}>
               <Photo
-                photo={PHOTOS.takoyakiSalt}
-                ratio="square"
-                sizes="(min-width: 640px) 31vw, 100vw"
+                photo={PHOTOS.menuTakoyaki}
+                ratio="auto"
+                sizes="(min-width: 640px) 420px, 92vw"
+                className="mx-auto max-w-[26rem]"
               />
-              <p className="mt-3 font-gothic text-[0.75rem] tracking-[0.08em] text-sumi-3">
-                岩塩系
-              </p>
-            </Reveal>
-            <Reveal delay={160}>
-              <Photo
-                photo={PHOTOS.takoyakiWasabi}
-                ratio="square"
-                sizes="(min-width: 640px) 31vw, 100vw"
-              />
-              <p className="mt-3 font-gothic text-[0.75rem] tracking-[0.08em] text-sumi-3">
-                きざみワサビ（当店オリジナル）
-              </p>
             </Reveal>
           </div>
-
-          <Reveal delay={80}>
-            <ul className="mt-12 border-t border-rule sm:columns-2 sm:gap-x-14">
-              {TAKOYAKI_FLAVORS.map((item) => (
-                <PriceRow key={item.name} item={item} />
-              ))}
-            </ul>
-            <p className="mt-5 font-gothic text-[0.76rem] leading-[2] text-sumi-3">
-              きざみワサビの価格は店頭の貼り紙をご確認ください。
-            </p>
-            <Link href="/takoyaki" className="prose-link mt-6 inline-block font-gothic text-[0.85rem]">
-              たこ焼きについて詳しく
-            </Link>
-          </Reveal>
         </Container>
       </Section>
 
-      {/* おつまみ・一品 */}
+      {/* お酒 */}
       <Section tone="paper">
+        <Container size="wide">
+          <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+            <Reveal className="order-2 lg:sticky lg:top-28 lg:order-1">
+              <Photo
+                photo={PHOTOS.menuDrink}
+                ratio="auto"
+                sizes="(min-width: 640px) 420px, 92vw"
+                className="mx-auto max-w-[26rem]"
+              />
+            </Reveal>
+
+            <Reveal delay={100} className="order-1 lg:order-2">
+              <SectionTitle eyebrow="Drink" as="h2">
+                お酒は、{DRINK_PRICE_FROM}円から。
+              </SectionTitle>
+              <p className="mt-8 text-[0.95rem] leading-[2.15] text-sumi-2">
+                ビールは{DRINK_PRICE_FROM}
+                円、ハイボールとサワーは600円。ヤングハイボールは自家製のジンジャーが香る一杯です。
+              </p>
+              <div className="mt-10 space-y-10">
+                {DRINK_GROUPS.map((g) => (
+                  <div key={g.key}>
+                    <h3 className="font-mincho text-[1.15rem] tracking-[0.08em] text-sumi">
+                      {g.label}
+                    </h3>
+                    <ul className="mt-4 border-t border-rule">
+                      {g.items.map((item) => (
+                        <PriceRow key={item.name} item={item} />
+                      ))}
+                      {g.key === 'highball' ? <PriceRow item={SHOCHU} /> : null}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+              <Link href="/drink" className="prose-link mt-6 inline-block font-gothic text-[0.85rem]">
+                ちょい飲み・一人飲みの使い方
+              </Link>
+            </Reveal>
+          </div>
+        </Container>
+      </Section>
+
+      {/* おつまみ・甘いもの */}
+      <Section tone="paper-2">
         <Container size="wide">
           <div className="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20">
             <Reveal>
@@ -190,23 +229,31 @@ export default function MenuPage() {
               <p className="mt-5 font-gothic text-[0.76rem] leading-[2] text-sumi-3">
                 その日の仕入れによって内容が変わります。棚と黒板を見て選んでください。
               </p>
-            </Reveal>
 
-            <Reveal delay={100}>
-              <SectionTitle eyebrow="Drink" as="h2">
-                お酒は、各{DRINK_PRICE}円。
-              </SectionTitle>
-              <p className="mt-8 text-[0.95rem] leading-[2.15] text-sumi-2">
-                値段を揃えてあるので、二杯目を選ぶときに迷いません。ヤングハイボールは自家製のジンジャーが香る一杯です。
-              </p>
-              <ul className="mt-10 border-t border-rule">
-                {DRINKS.map((item) => (
+              <h3 className="mt-14 font-mincho text-[1.15rem] tracking-[0.08em] text-sumi">
+                甘いもの
+              </h3>
+              <ul className="mt-4 border-t border-rule">
+                {SWEETS.map((item) => (
                   <PriceRow key={item.name} item={item} />
                 ))}
               </ul>
-              <Link href="/drink" className="prose-link mt-6 inline-block font-gothic text-[0.85rem]">
-                ちょい飲み・一人飲みの使い方
-              </Link>
+            </Reveal>
+
+            <Reveal delay={100}>
+              <div className="grid grid-cols-2 gap-4">
+                <Photo
+                  photo={PHOTOS.otsumamiSet}
+                  ratio="tall"
+                  sizes="(min-width: 1024px) 23vw, 45vw"
+                />
+                <Photo
+                  photo={PHOTOS.peachMelba}
+                  ratio="tall"
+                  sizes="(min-width: 1024px) 23vw, 45vw"
+                  className="mt-10"
+                />
+              </div>
             </Reveal>
           </div>
         </Container>
@@ -247,12 +294,12 @@ export default function MenuPage() {
           {
             href: '/takoyaki',
             label: 'たこ焼き',
-            body: '味の選び方と、焼き上がりまでの数分のこと。',
+            body: '北海道産の大だこと、焼き方のこと。',
           },
           {
             href: '/drink',
             label: 'ちょい飲み・一人飲み',
-            body: '千円で足りる、三軒茶屋の寄り道の作り方。',
+            body: '三軒茶屋の寄り道の、よくある使い方。',
           },
           {
             href: '/access',

@@ -33,6 +33,8 @@ export const ACCESS = {
   line: '東急田園都市線・東急世田谷線',
   primaryLine: '東急田園都市線',
   walkMinutes: 4,
+  /** 店主からの修正指示（2026-09-15） */
+  road: '世田谷通り',
   summary: '東急田園都市線 三軒茶屋駅から徒歩約4分',
 } as const;
 
@@ -67,14 +69,16 @@ export const SERVICE = {
   priceRange: '￥',
   cuisine: ['たこ焼き', '居酒屋'],
   /** 画面で使う言い回しの基準 */
-  styleLabel: '店先のカウンターで立ち飲み・テイクアウト',
+  styleLabel: '店内のカウンターで立ち飲み／たこ焼きのテイクアウト可',
+  /** 店主からの修正指示（2026-09-15） */
+  tv: 'カウンター越しにテレビモニターがあり、スポーツ観戦をしながら一杯楽しめます。',
 } as const;
 
 /** 5秒で伝えたい要点（ヒーロー直下で使う） */
 export const QUICK_FACTS = [
   { label: '場所', value: '三軒茶屋駅 徒歩4分' },
-  { label: '名物', value: 'たこ焼き 6個700円' },
-  { label: 'お酒', value: 'ドリンク 各500円' },
+  { label: '名物', value: 'たこ焼き 6個700円〜' },
+  { label: 'お酒', value: 'ビール500円・ハイボール600円' },
   { label: '営業', value: '16:00〜22:00／水・日休' },
 ] as const;
 
@@ -84,5 +88,31 @@ export const BARBER = {
   foundedYear: 1923,
   generations: 4,
   renamedEra: '昭和40年',
-  originalName: 'ヤング軒',
+  /** 創業時の屋号（店主からの修正指示で「ヤング軒」から「理髪ヤング軒」に訂正） */
+  originalName: '理髪ヤング軒',
 } as const;
+
+/**
+ * 百年床屋の年表。TOP の Story（short）と /barber（body）で共有する。
+ * 出来事は既存LPと店主の修正指示で確認できたものだけ。推測で足さないこと。
+ */
+export const BARBER_TIMELINE = [
+  {
+    year: `${BARBER.foundedYear}年`,
+    title: `「${BARBER.originalName}」創業`,
+    short: '三軒茶屋の地で、初代が理髪店を開く。',
+    body: `三軒茶屋の地で、初代が理髪店を開きました。屋号は「${BARBER.originalName}」。街の発展とともに歩んできた老舗です。`,
+  },
+  {
+    year: BARBER.renamedEra,
+    title: `「${BARBER.name}」へ改名`,
+    short: '二代目の渡米をきっかけに、屋号を改める。',
+    body: `二代目が渡米を経験したことをきっかけに、屋号を「${BARBER.name}」へ。以来、地域の皆さまに支えられながら長年営業を続けてきました。`,
+  },
+  {
+    year: '創業100年',
+    title: `「${SITE_NAME}」開店`,
+    short: '三代目が、最初の屋号から名前をとって店を開く。',
+    body: '創業100年という節目を迎え、三代目が新たな挑戦として店の中に寄り道どころをオープン。最初の屋号の名前が、もう一度看板に戻ってきました。',
+  },
+] as const;

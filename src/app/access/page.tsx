@@ -14,6 +14,7 @@ import {
   MAP_EMBED_URL,
   MAP_SEARCH_URL,
   NAP,
+  SERVICE,
   SITE_NAME,
 } from '@/lib/site';
 
@@ -32,8 +33,8 @@ const ROUTE = [
   },
   {
     step: '2',
-    title: '太子堂方面へ歩く',
-    body: '駅前の大きな交差点から、太子堂4丁目の方向へ。飲食店の並ぶ通りを進みます。',
+    title: '世田谷通り沿いを歩く',
+    body: '駅前の大きな交差点から、世田谷通り沿いを太子堂4丁目の方向へ進みます。',
   },
   {
     step: '3',
@@ -65,7 +66,7 @@ export default function AccessPage() {
             {SITE_NAME}は{NAP.region}
             {NAP.city}
             {NAP.street}、理髪店スーパーヘアーヤングの店内にあります。{ACCESS.line} {ACCESS.station}
-            から徒歩約{ACCESS.walkMinutes}分。営業時間は{HOURS.display}、定休日は
+            から徒歩約{ACCESS.walkMinutes}分、{ACCESS.road}沿いです。営業時間は{HOURS.display}、定休日は
             {HOURS.closedDisplay}です。
           </p>
         }
@@ -128,7 +129,7 @@ export default function AccessPage() {
                   <dt className="w-24 shrink-0 font-gothic text-[0.75rem] tracking-[0.14em] text-sumi-3">
                     スタイル
                   </dt>
-                  <dd className="text-sumi">店先のカウンターで立ち飲み／たこ焼きのテイクアウト可</dd>
+                  <dd className="text-sumi">{SERVICE.styleLabel}</dd>
                 </div>
               </dl>
 

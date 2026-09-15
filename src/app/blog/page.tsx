@@ -87,12 +87,12 @@ export default function BlogIndexPage() {
           {
             href: '/drink',
             label: 'ちょい飲み・一人飲み',
-            body: '三軒茶屋で軽く一杯。990円の寄り道セット。',
+            body: '三軒茶屋で軽く一杯。税込1,200円の寄り道セット。',
           },
           {
             href: '/takoyaki',
             label: 'たこ焼き',
-            body: '6個700円。ソース・岩塩・きざみワサビ。',
+            body: '6個700円から。ソース・岩塩・きざみワサビ。',
           },
           {
             href: '/access',

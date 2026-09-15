@@ -7,32 +7,14 @@ import { Photo } from '@/components/ui/Photo';
 import { Reveal } from '@/components/ui/Reveal';
 import { NextLinks } from '@/components/ui/NextLinks';
 import { PHOTOS } from '@/lib/photos';
-import { BARBER, SITE_NAME } from '@/lib/site';
+import { BARBER, BARBER_TIMELINE, SITE_NAME } from '@/lib/site';
 
 export const metadata = pageMetadata({
   title: 'スーパーヘアーヤングとヤング軒の歴史｜三軒茶屋の百年床屋',
   description:
-    '三軒茶屋で1923年から4世代続く理髪店スーパーヘアーヤング。その最初の屋号が「ヤング軒」でした。創業100年の節目に三代目が始めた立ち飲み処ヤング軒と、街と店の物語をまとめました。',
+    '三軒茶屋で1923年から4世代続く理髪店スーパーヘアーヤング。その最初の屋号が「理髪ヤング軒」でした。創業100年の節目に三代目が始めたヤング軒と、街と店の物語をまとめました。',
   path: '/barber',
 });
-
-const TIMELINE = [
-  {
-    year: `${BARBER.foundedYear}年`,
-    title: '理髪店「ヤング軒」創業',
-    body: '三軒茶屋の地で、初代が理髪店を開きました。屋号は「ヤング軒」。街の発展とともに歩んできた老舗です。',
-  },
-  {
-    year: BARBER.renamedEra,
-    title: '「スーパーヘアーヤング」へ改名',
-    body: '二代目が渡米を経験したことをきっかけに、屋号を「スーパーヘアーヤング」へ。以来、地域の皆さまに支えられながら長年営業を続けてきました。',
-  },
-  {
-    year: '創業100年',
-    title: '立ち飲み処「ヤング軒」開店',
-    body: '創業100年という節目を迎え、三代目が新たな挑戦として立ち飲み処をオープン。店に、最初の名前が戻ってきました。',
-  },
-];
 
 export default function BarberPage() {
   return (
@@ -54,7 +36,7 @@ export default function BarberPage() {
           </p>
         }
         trail={[{ name: '百年床屋の話', href: '/barber' }]}
-        photo={PHOTOS.exteriorWide}
+        photo={PHOTOS.barberOldInterior}
       />
 
       <Section tone="paper">
@@ -65,7 +47,7 @@ export default function BarberPage() {
             </SectionTitle>
             <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
               <p>
-                三軒茶屋の発展とともに歩んできた理髪店「{BARBER.originalName}」は、初代が創業した老舗です。
+                三軒茶屋の発展とともに歩んできた「{BARBER.originalName}」は、初代が創業した理髪店です。
                 {BARBER.renamedEra}
                 、二代目が渡米を経験したことをきっかけに、屋号を「{BARBER.name}」へと改名しました。
               </p>
@@ -73,17 +55,42 @@ export default function BarberPage() {
                 それから長い年月、地域の皆さまに支えられながら、三軒茶屋の街とともに歴史を重ねてきました。髪を切りに来る人が、世間話をして帰っていく。そういう場所として、百年続いてきたお店です。
               </p>
               <p>
-                そして創業100年という節目に、三代目が新たな挑戦として立ち飲み処「{SITE_NAME}
-                」を始めました。理髪店として受け継いできた「人と人とのつながり」を大切にしながら、気軽に集い、語らい、笑顔が生まれる場所を目指しています。
+                そして創業100年という節目に、三代目が新たな挑戦として、最初の屋号から名前をとった「
+                {SITE_NAME}」を始めました。理髪店として受け継いできた「人と人とのつながり」を大切にしながら、気軽に集い、語らい、笑顔が生まれる場所を目指しています。
               </p>
             </div>
           </Reveal>
 
+          {/* 昔の写真（撮影年は未確認なので年代は書かない） */}
+          <Reveal className="mt-14 grid items-start gap-5 sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+            <figure>
+              <Photo
+                photo={PHOTOS.barberOldExterior}
+                ratio="portrait"
+                sizes="(min-width: 768px) 290px, 100vw"
+              />
+              <figcaption className="mt-3 font-gothic text-[0.72rem] leading-relaxed tracking-[0.08em] text-sumi-3">
+                昔の理髪店の店構え。
+              </figcaption>
+            </figure>
+            <figure>
+              <Photo
+                photo={PHOTOS.oldTram}
+                ratio="landscape"
+                sizes="(min-width: 768px) 440px, 100vw"
+              />
+              <figcaption className="mt-3 font-gothic text-[0.72rem] leading-relaxed tracking-[0.08em] text-sumi-3">
+                昔の路面電車の風景。
+                <span className="ml-2">写真：生田誠氏提供</span>
+              </figcaption>
+            </figure>
+          </Reveal>
+
           <ol className="mt-16">
-            {TIMELINE.map((t, i) => (
+            {BARBER_TIMELINE.map((t, i) => (
               <Reveal
                 as="li"
-                key={t.title}
+                key={t.year}
                 delay={i * 90}
                 className="grid gap-3 border-b border-rule py-8 first:border-t sm:grid-cols-[9rem_minmax(0,1fr)] sm:gap-8"
               >
@@ -123,7 +130,7 @@ export default function BarberPage() {
                   がやろうとしているのも、たぶん同じことです。たこ焼きが焼けるのを待つ数分。カウンターに立って飲む一杯。用事はそれだけなのに、なぜか少し長くいてしまう。
                 </p>
                 <p>
-                  三軒茶屋で百年、人が集まってきた場所に、新しい寄り道処ができました。そういう店だと思ってもらえたら、うれしいです。
+                  三軒茶屋で百年、人が集まってきた場所に、新しい寄り道どころができました。そういう店だと思ってもらえたら、うれしいです。
                 </p>
               </div>
             </Reveal>
@@ -166,7 +173,7 @@ export default function BarberPage() {
           {
             href: '/takoyaki',
             label: 'たこ焼き',
-            body: '6個700円。三軒茶屋で焼きたてをつまむ。',
+            body: '北海道産の大だこ。三軒茶屋で焼きたてをつまむ。',
           },
           {
             href: '/blog',

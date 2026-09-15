@@ -8,20 +8,21 @@ export function YorimichiSetSection() {
   return (
     <Section tone="paper-2" size="loose" id="yorimichi-set">
       <Container size="wide">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-20">
+        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-20">
           <Reveal>
+            {/* ポスターは文字を読ませたいのでトリミングせず全体を見せる */}
             <Photo
-              photo={PHOTOS.signboardSet}
-              ratio="portrait"
-              sizes="(min-width: 1024px) 44vw, 100vw"
-              className="shadow-[0_18px_48px_-30px_rgba(32,27,23,0.6)]"
+              photo={PHOTOS.yorimichiSetPoster}
+              ratio="auto"
+              sizes="(min-width: 1024px) 420px, (min-width: 640px) 420px, 92vw"
+              className="mx-auto max-w-[26rem] shadow-[0_18px_48px_-30px_rgba(32,27,23,0.6)]"
             />
           </Reveal>
 
           <Reveal delay={100}>
             <div className="flex items-center gap-4">
               <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-enji font-mincho text-[0.78rem] leading-tight tracking-[0.05em] text-paper">
-                名物
+                一押し
               </span>
               <div>
                 <p className="font-gothic text-[0.72rem] tracking-[0.18em] text-sumi-3">
@@ -34,9 +35,7 @@ export function YorimichiSetSection() {
             </div>
 
             <p className="mt-9 text-[0.95rem] leading-[2.15] text-sumi-2">
-              たこ焼きを三種、食べ比べで。そこにお好きなドリンクが1杯ついて
-              <span className="tcy mx-0.5">990</span>
-              円。三軒茶屋で軽く一杯だけ、という夜にちょうどいい大きさにしてあります。
+              当店一押しのたこ焼き三種盛りに、お好きなドリンクを1杯。三軒茶屋で軽く一杯だけ、という夜にちょうどいい組み合わせです。
             </p>
 
             <div className="mt-10 border-y border-rule py-8">
@@ -51,9 +50,15 @@ export function YorimichiSetSection() {
                   </li>
                 ))}
               </ul>
+              <p className="mt-3 font-gothic text-[0.75rem] tracking-[0.08em] text-sumi-3">
+                {YORIMICHI_SET.itemsDetail}
+              </p>
 
               <p className="mt-7 font-mincho text-[1.1rem] tracking-[0.08em] text-sumi">
                 ＋ {YORIMICHI_SET.drinkLabel}
+              </p>
+              <p className="mt-3 font-gothic text-[0.75rem] leading-[1.9] tracking-[0.06em] text-sumi-3">
+                {YORIMICHI_SET.drinkChoices.join('／')}
               </p>
 
               <p className="mt-8 font-mincho text-sumi">

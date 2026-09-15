@@ -1,6 +1,7 @@
 /**
- * メニュー情報。出典は店頭の黒板・貼り紙・立て看板の写真のみ。
- * 写真から確定できない価格は price を null にして「店頭表示」と出す。
+ * メニュー情報。
+ * 出典は店側から届いたメニュー表（たこ焼き・ドリンク・寄り道セット・ピーチメルバ／2026-09-15）と、
+ * 店主からの修正指示。確定できない価格は price を null にして「店頭表示」と出す。
  */
 
 export type MenuItem = {
@@ -10,60 +11,126 @@ export type MenuItem = {
   unit?: string;
 };
 
-/** たこ焼き（6個 700円・ソース／塩） */
+/** たこ焼きの基本（すべて6個入り・税込。いちばん安い味が700円） */
 export const TAKOYAKI_BASE = {
   pieces: 6,
   price: 700,
-  label: 'たこ焼き（6個）',
+  taxNote: '税込',
+  label: 'たこ焼き（6個入り）',
 } as const;
 
-/** 黒板に掲示されている味の一覧 */
-export const TAKOYAKI_FLAVORS: MenuItem[] = [
-  { name: 'ソース', price: 700, unit: '6個' },
-  { name: 'ソースマヨ', price: 700, unit: '6個' },
-  { name: 'ソースからしマヨ', price: 700, unit: '6個' },
-  { name: 'ソース七味マヨ', price: 700, unit: '6個' },
-  { name: '岩塩マヨ', price: 700, unit: '6個' },
-  { name: '岩塩ブラックペッパー', price: 700, unit: '6個' },
-  { name: 'きざみワサビ', note: '当店オリジナル', price: null, unit: '6個' },
+/** たこ焼きについて店主から聞いた事実（2026-09-15） */
+export const TAKOYAKI_STORY = {
+  octopus: '北海道産の大だこ',
+  maker: '職人の大ちゃん',
+  oil: 'こめ油',
+  lifeMinutes: 30,
+} as const;
+
+export type TakoyakiFlavor = MenuItem & { group: 'sauce' | 'salt' | 'special' };
+
+/** メニュー表の味（すべて6個入り・税込） */
+export const TAKOYAKI_FLAVORS: TakoyakiFlavor[] = [
+  { name: 'ソース', price: 700, unit: '6個', group: 'sauce' },
+  { name: 'ソースマヨ', price: 700, unit: '6個', group: 'sauce' },
+  { name: 'からしマヨ', price: 700, unit: '6個', group: 'sauce' },
+  { name: 'マヨ七味', price: 700, unit: '6個', group: 'sauce' },
+  { name: '岩塩', price: 700, unit: '6個', group: 'salt' },
+  { name: '岩塩ペッパー', price: 700, unit: '6個', group: 'salt' },
+  { name: 'きざみワサビ', note: '当店オリジナル', price: 800, unit: '6個', group: 'special' },
+  { name: 'ガーリックマヨ', price: 800, unit: '6個', group: 'special' },
 ];
 
-/** 寄り道セット（店頭立て看板） */
+/** 寄り道セット（セットのポスター） */
 export const YORIMICHI_SET = {
   name: '寄り道セット',
   catch: 'ちょっと寄ってく？',
-  price: 990,
+  price: 1200,
   taxNote: '税込',
-  items: ['ソースマヨネーズ', '岩塩ペッパー', 'きざみワサビ'],
-  itemsLabel: 'たこ焼き三種盛',
+  items: ['きざみワサビ', 'ソースマヨ', '岩塩ペッパー'],
+  itemsLabel: 'たこ焼き三種盛り（6個入り）',
+  itemsDetail: '3種類×各2個',
   drinkLabel: 'お好きなドリンク1杯',
+  drinkChoices: ['缶ビール', 'ヤングハイ（ジンジャーハイボール）', 'ハイボール', 'レモンサワー', '焼酎'],
 } as const;
 
-/** ドリンク（黒板 DRINK・各500円） */
-export const DRINK_PRICE = 500;
+/** ドリンク（メニュー表）。価格帯ごとにまとめて持つ */
+export type DrinkGroup = {
+  key: string;
+  label: string;
+  price: number;
+  items: MenuItem[];
+};
 
-export const DRINKS: MenuItem[] = [
-  { name: 'ヤングハイボール', note: 'ジンジャー', price: DRINK_PRICE },
-  { name: '角ハイボール', price: DRINK_PRICE },
-  { name: 'レモンサワー', price: DRINK_PRICE },
-  { name: 'ウーロンハイ', price: DRINK_PRICE },
-  { name: '緑茶ハイ', price: DRINK_PRICE },
-  { name: '缶ビール', price: DRINK_PRICE },
+export const DRINK_GROUPS: DrinkGroup[] = [
+  {
+    key: 'beer',
+    label: 'ビール',
+    price: 500,
+    items: [
+      { name: '缶ビール各種', note: 'アサヒ・サッポロ・キリンなど', price: 500 },
+      { name: '瓶ビール', note: 'ハイネケン・ハートランド・バドワイザー', price: 500 },
+    ],
+  },
+  {
+    key: 'highball',
+    label: 'ハイボール・サワー',
+    price: 600,
+    items: [
+      { name: 'ヤングハイボール', note: 'ジンジャー', price: 600 },
+      { name: '角ハイボール', price: 600 },
+      { name: 'レモンサワー', price: 600 },
+      { name: 'はちみつレモンサワー', price: 600 },
+      { name: 'コークハイ', price: 600 },
+      { name: 'カルピスサワー', price: 600 },
+      { name: '緑茶ハイ', price: 600 },
+      { name: 'ウーロンハイ', price: 600 },
+    ],
+  },
+  {
+    key: 'soft',
+    label: 'ソフトドリンク',
+    price: 350,
+    items: [
+      { name: 'コーラ', price: 350 },
+      { name: 'オレンジジュース', price: 350 },
+      { name: 'クラフトジンジャーエール', price: 350 },
+      { name: 'レモネード', price: 350 },
+      { name: 'レモンスカッシュ', price: 350 },
+      { name: '緑茶', price: 350 },
+      { name: '烏龍茶', price: 350 },
+    ],
+  },
 ];
 
 /**
+ * 焼酎は寄り道セットで選べるドリンクとしてポスターに載っているが、
+ * ドリンクのメニュー表に単品価格が無いので「店頭表示」にしている。
+ */
+export const SHOCHU: MenuItem = { name: '焼酎', note: 'ロック・水割り・お湯割り', price: null };
+
+export const DRINKS: MenuItem[] = [...DRINK_GROUPS.flatMap((g) => g.items), SHOCHU];
+
+/** いちばん安いお酒（ビール） */
+export const DRINK_PRICE_FROM = 500;
+
+/**
  * おつまみ・一品。
- * 店内の黒板（きゅうりの旨キムチ）と棚の缶つまみから確認できたものだけ。
- * 価格は写真から読み取れないため null（＝店頭表示）にしてある。
- * 料理の一次情報が増えたらここに足す。
+ * 黒板・写真・店主からの修正指示で確認できたものだけ。価格は未確認のため null（＝店頭表示）。
+ * すもっちはパッケージに「やわらかくんせいたまご」とある山形の燻製たまご。
  */
 export const SNACKS: MenuItem[] = [
-  { name: 'きゅうりの旨キムチ', note: '黒板の一品', price: null },
+  { name: 'きゅうりの塩キムチ', price: null },
+  { name: 'セロリ漬け', price: null },
+  { name: '山形名物 すもっち', note: 'やわらかい燻製たまご', price: null },
   { name: '缶つまみ各種', note: '焼き鳥・鯖・いか・赤貝ほか', price: null },
 ];
 
 export const SNACKS_NOTE =
-  'カウンターの棚には焼き鳥や鯖、いかなどの缶つまみが並んでいます。黒板にはきゅうりの旨キムチ。たこ焼きが焼き上がるまでの一品にどうぞ。';
+  'きゅうりの塩キムチに、セロリ漬け。山形名物のすもっちもあります。棚には焼き鳥や鯖、いかの缶つまみ。たこ焼きに添える一品にどうぞ。';
+
+/** 甘いもの（メニュー表） */
+export const SWEETS: MenuItem[] = [{ name: 'ピーチメルバ', note: '桃とバニラアイス', price: 450 }];
 
 export const formatPrice = (price: number | null) =>
   price === null ? '店頭表示' : `${price.toLocaleString('ja-JP')}円`;
