@@ -86,7 +86,7 @@ export const QUICK_FACTS = [
 export const BARBER = {
   name: 'スーパーヘアーヤング',
   foundedYear: 1923,
-  generations: 4,
+  generations: 3,
   renamedEra: '昭和40年',
   /** 創業時の屋号（店主からの修正指示で「ヤング軒」から「理髪ヤング軒」に訂正） */
   originalName: '理髪ヤング軒',

@@ -33,7 +33,7 @@ export function TakoyakiSection() {
         <div className="mt-14 grid gap-5 sm:mt-20 sm:grid-cols-2 lg:grid-cols-12 lg:gap-6">
           <Reveal className="lg:col-span-7">
             <Photo
-              photo={PHOTOS.takoyakiPepperLift}
+              photo={PHOTOS.takoyakiWasabiHighball}
               ratio="landscape"
               sizes="(min-width: 1024px) 56vw, (min-width: 640px) 50vw, 100vw"
             />

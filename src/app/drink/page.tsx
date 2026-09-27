@@ -74,8 +74,7 @@ export default function DrinkPage() {
           </p>
         }
         trail={[{ name: 'ちょい飲み・一人飲み', href: '/drink' }]}
-        photo={PHOTOS.counterTv}
-        photoPosition="88% 50%"
+        photo={PHOTOS.takoyakiWasabiHighball}
       />
 
       <Section tone="paper">

@@ -79,7 +79,7 @@ export function Footer() {
                 {BARBER.name}
               </p>
               <p className="mt-4 font-gothic text-[0.8rem] leading-[2] text-paper/60">
-                {SITE_NAME}は、三軒茶屋で{BARBER.generations}世代続く理髪店
+                {SITE_NAME}は、三軒茶屋で{BARBER.generations}代続く理髪店
                 {BARBER.name}の店内にあります。
               </p>
               <Link

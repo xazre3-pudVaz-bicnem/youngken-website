@@ -21,8 +21,8 @@ const ITEMS = [
   // 4段目：横位置2枚（焼き場とカウンター）
   { photo: PHOTOS.kitchen, span: 'col-span-2 lg:col-span-3', ratio: 'landscape' },
   { photo: PHOTOS.staffCounter, span: 'col-span-2 lg:col-span-3', ratio: 'landscape' },
-  // 5〜6段目：たこ焼き4枚
-  { photo: PHOTOS.takoyakiWasabiHighball, span: 'lg:col-span-3', ratio: 'landscape' },
+  // 5〜6段目：店内とたこ焼き
+  { photo: PHOTOS.counterTv, span: 'lg:col-span-3', ratio: 'landscape' },
   { photo: PHOTOS.takoyakiSauceMayo, span: 'lg:col-span-3', ratio: 'landscape' },
   { photo: PHOTOS.takoyakiPepper, span: 'lg:col-span-3', ratio: 'landscape' },
   { photo: PHOTOS.takoyakiWasabi, span: 'lg:col-span-3', ratio: 'landscape' },

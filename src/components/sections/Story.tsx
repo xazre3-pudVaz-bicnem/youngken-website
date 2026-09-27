@@ -112,7 +112,7 @@ export function Story() {
 
         <Reveal delay={120} className="mt-10 sm:mt-12">
           <p className="font-gothic text-[0.78rem] leading-[2] text-sumi-3">
-            {BARBER.foundedYear}年創業、{BARBER.generations}世代続く「{BARBER.name}
+            {BARBER.foundedYear}年創業、{BARBER.generations}代続く「{BARBER.name}
             」の店内で営業しています。
           </p>
           <Link

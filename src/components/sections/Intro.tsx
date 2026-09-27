@@ -71,13 +71,13 @@ export function Intro() {
 
           <Reveal delay={120}>
             <Photo
-              photo={PHOTOS.counterTv}
-              ratio="wide"
+              photo={PHOTOS.takoyakiPepperLift}
+              ratio="landscape"
               sizes="(min-width: 1024px) 46vw, 100vw"
               className="shadow-[0_18px_48px_-28px_rgba(32,27,23,0.55)]"
             />
             <p className="mt-4 font-gothic text-[0.72rem] leading-relaxed tracking-[0.08em] text-sumi-3">
-              カウンター越しのテレビで、試合を観ながら一杯。
+              外はカリッと、中はとろっと。焼きたてを店内で。
             </p>
           </Reveal>
         </div>

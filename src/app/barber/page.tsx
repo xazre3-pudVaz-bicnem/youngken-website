@@ -12,7 +12,7 @@ import { BARBER, BARBER_TIMELINE, SITE_NAME } from '@/lib/site';
 export const metadata = pageMetadata({
   title: 'スーパーヘアーヤングとヤング軒の歴史｜三軒茶屋の百年床屋',
   description:
-    '三軒茶屋で1923年から4世代続く理髪店スーパーヘアーヤング。その最初の屋号が「理髪ヤング軒」でした。創業100年の節目に三代目が始めたヤング軒と、街と店の物語をまとめました。',
+    '三軒茶屋で1923年から3代続く理髪店スーパーヘアーヤング。その最初の屋号が「理髪ヤング軒」でした。創業100年の節目に三代目が始めたヤング軒と、街と店の物語をまとめました。',
   path: '/barber',
 });
 
@@ -31,7 +31,7 @@ export default function BarberPage() {
         lead={
           <p>
             {SITE_NAME}があるのは、三軒茶屋で{BARBER.foundedYear}年から{BARBER.generations}
-            世代続く理髪店「{BARBER.name}」の店内です。そして、その理髪店の最初の屋号が「
+            代続く理髪店「{BARBER.name}」の店内です。そして、その理髪店の最初の屋号が「
             {BARBER.originalName}」でした。
           </p>
         }
@@ -150,7 +150,7 @@ export default function BarberPage() {
               </p>
               <p className="mt-5 text-[0.92rem] leading-[2.1] text-sumi-2">
                 {BARBER.foundedYear}年の創業以来、三軒茶屋の地で{BARBER.generations}
-                世代にわたり、地域の皆さまの「いつも」を支えてきました。これからも、変わらぬ技術と温かい笑顔で、みなさまの身だしなみを整えてまいります。
+                代にわたり、地域の皆さまの「いつも」を支えてきました。これからも、変わらぬ技術と温かい笑顔で、みなさまの身だしなみを整えてまいります。
               </p>
               <p className="mt-6 font-gothic text-[0.78rem] leading-[2] text-sumi-3">
                 {SITE_NAME}は、この{BARBER.name}の店内で営業しています。

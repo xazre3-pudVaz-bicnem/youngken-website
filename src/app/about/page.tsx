@@ -135,7 +135,7 @@ export default function AboutPage() {
             <div className="mt-9 space-y-6 text-[0.95rem] leading-[2.15] text-sumi-2">
               <p>
                 ヤング軒があるのは、三軒茶屋で{BARBER.foundedYear}年から
-                {BARBER.generations}世代続く理髪店「{BARBER.name}」の店内です。そしてその理髪店のいちばん最初の屋号が、「{BARBER.originalName}」でした。
+                {BARBER.generations}代続く理髪店「{BARBER.name}」の店内です。そしてその理髪店のいちばん最初の屋号が、「{BARBER.originalName}」でした。
               </p>
               <p>
                 髪を切りに来る人と、一杯飲みに来る人。人が集まる場所であることは、百年前から変わっていません。
